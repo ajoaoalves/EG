@@ -16,10 +16,11 @@ def p_Sentence_1(p):
     intervals_aux = p[2]
     max = len(intervals_aux)
 
-    for i in range(len(intervals_aux) - 1): 
-        if max == 1 and (intervals_aux[i][0] - intervals_aux[i][1] >= 0): 
+    if max == 1 and (intervals_aux[0][0] - intervals_aux[0][1] >= 0): 
             print(f"Intervalos Ordenados")
-        elif ((intervals_aux[i][0] - intervals_aux[i][1] >= 0 and intervals_aux[i+1][0] - intervals_aux[i][1] <= 0) and (intervals_aux[max-1][0] - intervals_aux[max-1][1] >= 0)):
+
+    for i in range(len(intervals_aux) - 1): 
+        if ((intervals_aux[i][0] - intervals_aux[i][1] >= 0 and intervals_aux[i+1][0] - intervals_aux[i][1] <= 0) and (intervals_aux[max-1][0] - intervals_aux[max-1][1] >= 0)):
             print(f"Intervalos Ordenados")
         else:
             print(f"Intervalos desordenados")
@@ -30,10 +31,12 @@ def p_Sentence_2(p):
     intervals_aux = p[2]
     max = len(intervals_aux)
 
+    if (max == 1 and (intervals_aux[0][1] - intervals_aux[0][0] >= 0)): 
+        print(f"Intervalos Ordenados")
+
     for i in range(len(intervals_aux) - 1): 
-        if max == 1 and (intervals_aux[i][0] - intervals_aux[i][1] <= 0): 
-            print(f"Intervalos Ordenados")
-        elif (max > 1 and ((intervals_aux[i][0] - intervals_aux[i][1] <= 0 and  intervals_aux[i][1] - intervals_aux[i+1][0] <= 0) and (intervals_aux[max-1][0] - intervals_aux[max-1][1] <= 0))):
+        
+        if (max > 1 and ((intervals_aux[i][0] - intervals_aux[i][1] <= 0 and  intervals_aux[i][1] - intervals_aux[i+1][0] <= 0) and (intervals_aux[max-1][0] - intervals_aux[max-1][1] <= 0))):
             print(f"Intervalos Ordenados")
         else:
             print(f"Intervalos desordenados")
