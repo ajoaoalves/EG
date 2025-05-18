@@ -2,7 +2,7 @@ from lark import Lark, Tree
 from lark.tree import pydot__tree_to_png
 
 # ------------------------------------------------------------
-# TPC1 : Intervalos (definição sintática e verificação simples)
+# TPC2 : Intervalos (definição sintática e verificação simples)
 # ------------------------------------------------------------
 
 grammar2 = '''

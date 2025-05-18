@@ -1,0 +1,936 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ARRAY
+    SET
+
+Grammar
+
+Rule 0     S' -> annotation
+Rule 1     annotation -> inputs ROW outputs FUNC IDENTIFIER LBRACE body RBRACE
+Rule 2     inputs -> input
+Rule 3     inputs -> input inputs
+Rule 4     input -> TYPE_INT IDENTIFIER
+Rule 5     input -> TYPE_STRING IDENTIFIER
+Rule 6     input -> TYPE_SET IDENTIFIER
+Rule 7     input -> TYPE_ARRAY IDENTIFIER
+Rule 8     outputs -> RETURN output
+Rule 9     outputs -> RETURN output outputs
+Rule 10    output -> TYPE_INT IDENTIFIER
+Rule 11    output -> TYPE_STRING IDENTIFIER
+Rule 12    output -> TYPE_SET IDENTIFIER
+Rule 13    output -> TYPE_ARRAY IDENTIFIER
+Rule 14    body -> statement
+Rule 15    body -> statement body
+Rule 16    statement -> selection
+Rule 17    statement -> repetition
+Rule 18    statement -> assignment
+Rule 19    selection -> IF LPAREN condition RPAREN THEN action
+Rule 20    repetition -> WHILE LPAREN condition RPAREN DO action
+Rule 21    repetition -> FROM IDENTIFIER EQUAL INT TO INT DO action
+Rule 22    condition -> comparison
+Rule 23    comparison -> expression REL_OP expression
+Rule 24    comparison -> comparison LOG_OP comparison
+Rule 25    expression -> IDENTIFIER
+Rule 26    expression -> INT
+Rule 27    expression -> STRING
+Rule 28    expression -> LPAREN expression RPAREN
+Rule 29    expression -> expression OPERATOR expression
+Rule 30    action -> assignment SEMICOLON
+Rule 31    action -> LBRACE body RBRACE
+Rule 32    assignment -> IDENTIFIER EQUAL expression SEMICOLON
+
+Terminals, with rules where they appear
+
+ARRAY                : 
+DO                   : 20 21
+EQUAL                : 21 32
+FROM                 : 21
+FUNC                 : 1
+IDENTIFIER           : 1 4 5 6 7 10 11 12 13 21 25 32
+IF                   : 19
+INT                  : 21 21 26
+LBRACE               : 1 31
+LOG_OP               : 24
+LPAREN               : 19 20 28
+OPERATOR             : 29
+RBRACE               : 1 31
+REL_OP               : 23
+RETURN               : 8 9
+ROW                  : 1
+RPAREN               : 19 20 28
+SEMICOLON            : 30 32
+SET                  : 
+STRING               : 27
+THEN                 : 19
+TO                   : 21
+TYPE_ARRAY           : 7 13
+TYPE_INT             : 4 10
+TYPE_SET             : 6 12
+TYPE_STRING          : 5 11
+WHILE                : 20
+error                : 
+
+Nonterminals, with rules where they appear
+
+action               : 19 20 21
+annotation           : 0
+assignment           : 18 30
+body                 : 1 15 31
+comparison           : 22 24 24
+condition            : 19 20
+expression           : 23 23 28 29 29 32
+input                : 2 3
+inputs               : 1 3
+output               : 8 9
+outputs              : 1 9
+repetition           : 17
+selection            : 16
+statement            : 14 15
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . annotation
+    (1) annotation -> . inputs ROW outputs FUNC IDENTIFIER LBRACE body RBRACE
+    (2) inputs -> . input
+    (3) inputs -> . input inputs
+    (4) input -> . TYPE_INT IDENTIFIER
+    (5) input -> . TYPE_STRING IDENTIFIER
+    (6) input -> . TYPE_SET IDENTIFIER
+    (7) input -> . TYPE_ARRAY IDENTIFIER
+
+    TYPE_INT        shift and go to state 4
+    TYPE_STRING     shift and go to state 5
+    TYPE_SET        shift and go to state 6
+    TYPE_ARRAY      shift and go to state 7
+
+    annotation                     shift and go to state 1
+    inputs                         shift and go to state 2
+    input                          shift and go to state 3
+
+state 1
+
+    (0) S' -> annotation .
+
+
+
+state 2
+
+    (1) annotation -> inputs . ROW outputs FUNC IDENTIFIER LBRACE body RBRACE
+
+    ROW             shift and go to state 8
+
+
+state 3
+
+    (2) inputs -> input .
+    (3) inputs -> input . inputs
+    (2) inputs -> . input
+    (3) inputs -> . input inputs
+    (4) input -> . TYPE_INT IDENTIFIER
+    (5) input -> . TYPE_STRING IDENTIFIER
+    (6) input -> . TYPE_SET IDENTIFIER
+    (7) input -> . TYPE_ARRAY IDENTIFIER
+
+    ROW             reduce using rule 2 (inputs -> input .)
+    TYPE_INT        shift and go to state 4
+    TYPE_STRING     shift and go to state 5
+    TYPE_SET        shift and go to state 6
+    TYPE_ARRAY      shift and go to state 7
+
+    input                          shift and go to state 3
+    inputs                         shift and go to state 9
+
+state 4
+
+    (4) input -> TYPE_INT . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 10
+
+
+state 5
+
+    (5) input -> TYPE_STRING . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 11
+
+
+state 6
+
+    (6) input -> TYPE_SET . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 12
+
+
+state 7
+
+    (7) input -> TYPE_ARRAY . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 13
+
+
+state 8
+
+    (1) annotation -> inputs ROW . outputs FUNC IDENTIFIER LBRACE body RBRACE
+    (8) outputs -> . RETURN output
+    (9) outputs -> . RETURN output outputs
+
+    RETURN          shift and go to state 15
+
+    outputs                        shift and go to state 14
+
+state 9
+
+    (3) inputs -> input inputs .
+
+    ROW             reduce using rule 3 (inputs -> input inputs .)
+
+
+state 10
+
+    (4) input -> TYPE_INT IDENTIFIER .
+
+    TYPE_INT        reduce using rule 4 (input -> TYPE_INT IDENTIFIER .)
+    TYPE_STRING     reduce using rule 4 (input -> TYPE_INT IDENTIFIER .)
+    TYPE_SET        reduce using rule 4 (input -> TYPE_INT IDENTIFIER .)
+    TYPE_ARRAY      reduce using rule 4 (input -> TYPE_INT IDENTIFIER .)
+    ROW             reduce using rule 4 (input -> TYPE_INT IDENTIFIER .)
+
+
+state 11
+
+    (5) input -> TYPE_STRING IDENTIFIER .
+
+    TYPE_INT        reduce using rule 5 (input -> TYPE_STRING IDENTIFIER .)
+    TYPE_STRING     reduce using rule 5 (input -> TYPE_STRING IDENTIFIER .)
+    TYPE_SET        reduce using rule 5 (input -> TYPE_STRING IDENTIFIER .)
+    TYPE_ARRAY      reduce using rule 5 (input -> TYPE_STRING IDENTIFIER .)
+    ROW             reduce using rule 5 (input -> TYPE_STRING IDENTIFIER .)
+
+
+state 12
+
+    (6) input -> TYPE_SET IDENTIFIER .
+
+    TYPE_INT        reduce using rule 6 (input -> TYPE_SET IDENTIFIER .)
+    TYPE_STRING     reduce using rule 6 (input -> TYPE_SET IDENTIFIER .)
+    TYPE_SET        reduce using rule 6 (input -> TYPE_SET IDENTIFIER .)
+    TYPE_ARRAY      reduce using rule 6 (input -> TYPE_SET IDENTIFIER .)
+    ROW             reduce using rule 6 (input -> TYPE_SET IDENTIFIER .)
+
+
+state 13
+
+    (7) input -> TYPE_ARRAY IDENTIFIER .
+
+    TYPE_INT        reduce using rule 7 (input -> TYPE_ARRAY IDENTIFIER .)
+    TYPE_STRING     reduce using rule 7 (input -> TYPE_ARRAY IDENTIFIER .)
+    TYPE_SET        reduce using rule 7 (input -> TYPE_ARRAY IDENTIFIER .)
+    TYPE_ARRAY      reduce using rule 7 (input -> TYPE_ARRAY IDENTIFIER .)
+    ROW             reduce using rule 7 (input -> TYPE_ARRAY IDENTIFIER .)
+
+
+state 14
+
+    (1) annotation -> inputs ROW outputs . FUNC IDENTIFIER LBRACE body RBRACE
+
+    FUNC            shift and go to state 16
+
+
+state 15
+
+    (8) outputs -> RETURN . output
+    (9) outputs -> RETURN . output outputs
+    (10) output -> . TYPE_INT IDENTIFIER
+    (11) output -> . TYPE_STRING IDENTIFIER
+    (12) output -> . TYPE_SET IDENTIFIER
+    (13) output -> . TYPE_ARRAY IDENTIFIER
+
+    TYPE_INT        shift and go to state 18
+    TYPE_STRING     shift and go to state 19
+    TYPE_SET        shift and go to state 20
+    TYPE_ARRAY      shift and go to state 21
+
+    output                         shift and go to state 17
+
+state 16
+
+    (1) annotation -> inputs ROW outputs FUNC . IDENTIFIER LBRACE body RBRACE
+
+    IDENTIFIER      shift and go to state 22
+
+
+state 17
+
+    (8) outputs -> RETURN output .
+    (9) outputs -> RETURN output . outputs
+    (8) outputs -> . RETURN output
+    (9) outputs -> . RETURN output outputs
+
+    FUNC            reduce using rule 8 (outputs -> RETURN output .)
+    RETURN          shift and go to state 15
+
+    outputs                        shift and go to state 23
+
+state 18
+
+    (10) output -> TYPE_INT . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 24
+
+
+state 19
+
+    (11) output -> TYPE_STRING . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 25
+
+
+state 20
+
+    (12) output -> TYPE_SET . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 26
+
+
+state 21
+
+    (13) output -> TYPE_ARRAY . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 27
+
+
+state 22
+
+    (1) annotation -> inputs ROW outputs FUNC IDENTIFIER . LBRACE body RBRACE
+
+    LBRACE          shift and go to state 28
+
+
+state 23
+
+    (9) outputs -> RETURN output outputs .
+
+    FUNC            reduce using rule 9 (outputs -> RETURN output outputs .)
+
+
+state 24
+
+    (10) output -> TYPE_INT IDENTIFIER .
+
+    RETURN          reduce using rule 10 (output -> TYPE_INT IDENTIFIER .)
+    FUNC            reduce using rule 10 (output -> TYPE_INT IDENTIFIER .)
+
+
+state 25
+
+    (11) output -> TYPE_STRING IDENTIFIER .
+
+    RETURN          reduce using rule 11 (output -> TYPE_STRING IDENTIFIER .)
+    FUNC            reduce using rule 11 (output -> TYPE_STRING IDENTIFIER .)
+
+
+state 26
+
+    (12) output -> TYPE_SET IDENTIFIER .
+
+    RETURN          reduce using rule 12 (output -> TYPE_SET IDENTIFIER .)
+    FUNC            reduce using rule 12 (output -> TYPE_SET IDENTIFIER .)
+
+
+state 27
+
+    (13) output -> TYPE_ARRAY IDENTIFIER .
+
+    RETURN          reduce using rule 13 (output -> TYPE_ARRAY IDENTIFIER .)
+    FUNC            reduce using rule 13 (output -> TYPE_ARRAY IDENTIFIER .)
+
+
+state 28
+
+    (1) annotation -> inputs ROW outputs FUNC IDENTIFIER LBRACE . body RBRACE
+    (14) body -> . statement
+    (15) body -> . statement body
+    (16) statement -> . selection
+    (17) statement -> . repetition
+    (18) statement -> . assignment
+    (19) selection -> . IF LPAREN condition RPAREN THEN action
+    (20) repetition -> . WHILE LPAREN condition RPAREN DO action
+    (21) repetition -> . FROM IDENTIFIER EQUAL INT TO INT DO action
+    (32) assignment -> . IDENTIFIER EQUAL expression SEMICOLON
+
+    IF              shift and go to state 35
+    WHILE           shift and go to state 36
+    FROM            shift and go to state 37
+    IDENTIFIER      shift and go to state 29
+
+    body                           shift and go to state 30
+    statement                      shift and go to state 31
+    selection                      shift and go to state 32
+    repetition                     shift and go to state 33
+    assignment                     shift and go to state 34
+
+state 29
+
+    (32) assignment -> IDENTIFIER . EQUAL expression SEMICOLON
+
+    EQUAL           shift and go to state 38
+
+
+state 30
+
+    (1) annotation -> inputs ROW outputs FUNC IDENTIFIER LBRACE body . RBRACE
+
+    RBRACE          shift and go to state 39
+
+
+state 31
+
+    (14) body -> statement .
+    (15) body -> statement . body
+    (14) body -> . statement
+    (15) body -> . statement body
+    (16) statement -> . selection
+    (17) statement -> . repetition
+    (18) statement -> . assignment
+    (19) selection -> . IF LPAREN condition RPAREN THEN action
+    (20) repetition -> . WHILE LPAREN condition RPAREN DO action
+    (21) repetition -> . FROM IDENTIFIER EQUAL INT TO INT DO action
+    (32) assignment -> . IDENTIFIER EQUAL expression SEMICOLON
+
+    RBRACE          reduce using rule 14 (body -> statement .)
+    IF              shift and go to state 35
+    WHILE           shift and go to state 36
+    FROM            shift and go to state 37
+    IDENTIFIER      shift and go to state 29
+
+    statement                      shift and go to state 31
+    body                           shift and go to state 40
+    selection                      shift and go to state 32
+    repetition                     shift and go to state 33
+    assignment                     shift and go to state 34
+
+state 32
+
+    (16) statement -> selection .
+
+    IF              reduce using rule 16 (statement -> selection .)
+    WHILE           reduce using rule 16 (statement -> selection .)
+    FROM            reduce using rule 16 (statement -> selection .)
+    IDENTIFIER      reduce using rule 16 (statement -> selection .)
+    RBRACE          reduce using rule 16 (statement -> selection .)
+
+
+state 33
+
+    (17) statement -> repetition .
+
+    IF              reduce using rule 17 (statement -> repetition .)
+    WHILE           reduce using rule 17 (statement -> repetition .)
+    FROM            reduce using rule 17 (statement -> repetition .)
+    IDENTIFIER      reduce using rule 17 (statement -> repetition .)
+    RBRACE          reduce using rule 17 (statement -> repetition .)
+
+
+state 34
+
+    (18) statement -> assignment .
+
+    IF              reduce using rule 18 (statement -> assignment .)
+    WHILE           reduce using rule 18 (statement -> assignment .)
+    FROM            reduce using rule 18 (statement -> assignment .)
+    IDENTIFIER      reduce using rule 18 (statement -> assignment .)
+    RBRACE          reduce using rule 18 (statement -> assignment .)
+
+
+state 35
+
+    (19) selection -> IF . LPAREN condition RPAREN THEN action
+
+    LPAREN          shift and go to state 41
+
+
+state 36
+
+    (20) repetition -> WHILE . LPAREN condition RPAREN DO action
+
+    LPAREN          shift and go to state 42
+
+
+state 37
+
+    (21) repetition -> FROM . IDENTIFIER EQUAL INT TO INT DO action
+
+    IDENTIFIER      shift and go to state 43
+
+
+state 38
+
+    (32) assignment -> IDENTIFIER EQUAL . expression SEMICOLON
+    (25) expression -> . IDENTIFIER
+    (26) expression -> . INT
+    (27) expression -> . STRING
+    (28) expression -> . LPAREN expression RPAREN
+    (29) expression -> . expression OPERATOR expression
+
+    IDENTIFIER      shift and go to state 44
+    INT             shift and go to state 46
+    STRING          shift and go to state 47
+    LPAREN          shift and go to state 48
+
+    expression                     shift and go to state 45
+
+state 39
+
+    (1) annotation -> inputs ROW outputs FUNC IDENTIFIER LBRACE body RBRACE .
+
+    $end            reduce using rule 1 (annotation -> inputs ROW outputs FUNC IDENTIFIER LBRACE body RBRACE .)
+
+
+state 40
+
+    (15) body -> statement body .
+
+    RBRACE          reduce using rule 15 (body -> statement body .)
+
+
+state 41
+
+    (19) selection -> IF LPAREN . condition RPAREN THEN action
+    (22) condition -> . comparison
+    (23) comparison -> . expression REL_OP expression
+    (24) comparison -> . comparison LOG_OP comparison
+    (25) expression -> . IDENTIFIER
+    (26) expression -> . INT
+    (27) expression -> . STRING
+    (28) expression -> . LPAREN expression RPAREN
+    (29) expression -> . expression OPERATOR expression
+
+    IDENTIFIER      shift and go to state 44
+    INT             shift and go to state 46
+    STRING          shift and go to state 47
+    LPAREN          shift and go to state 48
+
+    condition                      shift and go to state 49
+    comparison                     shift and go to state 50
+    expression                     shift and go to state 51
+
+state 42
+
+    (20) repetition -> WHILE LPAREN . condition RPAREN DO action
+    (22) condition -> . comparison
+    (23) comparison -> . expression REL_OP expression
+    (24) comparison -> . comparison LOG_OP comparison
+    (25) expression -> . IDENTIFIER
+    (26) expression -> . INT
+    (27) expression -> . STRING
+    (28) expression -> . LPAREN expression RPAREN
+    (29) expression -> . expression OPERATOR expression
+
+    IDENTIFIER      shift and go to state 44
+    INT             shift and go to state 46
+    STRING          shift and go to state 47
+    LPAREN          shift and go to state 48
+
+    condition                      shift and go to state 52
+    comparison                     shift and go to state 50
+    expression                     shift and go to state 51
+
+state 43
+
+    (21) repetition -> FROM IDENTIFIER . EQUAL INT TO INT DO action
+
+    EQUAL           shift and go to state 53
+
+
+state 44
+
+    (25) expression -> IDENTIFIER .
+
+    SEMICOLON       reduce using rule 25 (expression -> IDENTIFIER .)
+    OPERATOR        reduce using rule 25 (expression -> IDENTIFIER .)
+    REL_OP          reduce using rule 25 (expression -> IDENTIFIER .)
+    RPAREN          reduce using rule 25 (expression -> IDENTIFIER .)
+    LOG_OP          reduce using rule 25 (expression -> IDENTIFIER .)
+
+
+state 45
+
+    (32) assignment -> IDENTIFIER EQUAL expression . SEMICOLON
+    (29) expression -> expression . OPERATOR expression
+
+    SEMICOLON       shift and go to state 54
+    OPERATOR        shift and go to state 55
+
+
+state 46
+
+    (26) expression -> INT .
+
+    SEMICOLON       reduce using rule 26 (expression -> INT .)
+    OPERATOR        reduce using rule 26 (expression -> INT .)
+    REL_OP          reduce using rule 26 (expression -> INT .)
+    RPAREN          reduce using rule 26 (expression -> INT .)
+    LOG_OP          reduce using rule 26 (expression -> INT .)
+
+
+state 47
+
+    (27) expression -> STRING .
+
+    SEMICOLON       reduce using rule 27 (expression -> STRING .)
+    OPERATOR        reduce using rule 27 (expression -> STRING .)
+    REL_OP          reduce using rule 27 (expression -> STRING .)
+    RPAREN          reduce using rule 27 (expression -> STRING .)
+    LOG_OP          reduce using rule 27 (expression -> STRING .)
+
+
+state 48
+
+    (28) expression -> LPAREN . expression RPAREN
+    (25) expression -> . IDENTIFIER
+    (26) expression -> . INT
+    (27) expression -> . STRING
+    (28) expression -> . LPAREN expression RPAREN
+    (29) expression -> . expression OPERATOR expression
+
+    IDENTIFIER      shift and go to state 44
+    INT             shift and go to state 46
+    STRING          shift and go to state 47
+    LPAREN          shift and go to state 48
+
+    expression                     shift and go to state 56
+
+state 49
+
+    (19) selection -> IF LPAREN condition . RPAREN THEN action
+
+    RPAREN          shift and go to state 57
+
+
+state 50
+
+    (22) condition -> comparison .
+    (24) comparison -> comparison . LOG_OP comparison
+
+    RPAREN          reduce using rule 22 (condition -> comparison .)
+    LOG_OP          shift and go to state 58
+
+
+state 51
+
+    (23) comparison -> expression . REL_OP expression
+    (29) expression -> expression . OPERATOR expression
+
+    REL_OP          shift and go to state 59
+    OPERATOR        shift and go to state 55
+
+
+state 52
+
+    (20) repetition -> WHILE LPAREN condition . RPAREN DO action
+
+    RPAREN          shift and go to state 60
+
+
+state 53
+
+    (21) repetition -> FROM IDENTIFIER EQUAL . INT TO INT DO action
+
+    INT             shift and go to state 61
+
+
+state 54
+
+    (32) assignment -> IDENTIFIER EQUAL expression SEMICOLON .
+
+    IF              reduce using rule 32 (assignment -> IDENTIFIER EQUAL expression SEMICOLON .)
+    WHILE           reduce using rule 32 (assignment -> IDENTIFIER EQUAL expression SEMICOLON .)
+    FROM            reduce using rule 32 (assignment -> IDENTIFIER EQUAL expression SEMICOLON .)
+    IDENTIFIER      reduce using rule 32 (assignment -> IDENTIFIER EQUAL expression SEMICOLON .)
+    RBRACE          reduce using rule 32 (assignment -> IDENTIFIER EQUAL expression SEMICOLON .)
+    SEMICOLON       reduce using rule 32 (assignment -> IDENTIFIER EQUAL expression SEMICOLON .)
+
+
+state 55
+
+    (29) expression -> expression OPERATOR . expression
+    (25) expression -> . IDENTIFIER
+    (26) expression -> . INT
+    (27) expression -> . STRING
+    (28) expression -> . LPAREN expression RPAREN
+    (29) expression -> . expression OPERATOR expression
+
+    IDENTIFIER      shift and go to state 44
+    INT             shift and go to state 46
+    STRING          shift and go to state 47
+    LPAREN          shift and go to state 48
+
+    expression                     shift and go to state 62
+
+state 56
+
+    (28) expression -> LPAREN expression . RPAREN
+    (29) expression -> expression . OPERATOR expression
+
+    RPAREN          shift and go to state 63
+    OPERATOR        shift and go to state 55
+
+
+state 57
+
+    (19) selection -> IF LPAREN condition RPAREN . THEN action
+
+    THEN            shift and go to state 64
+
+
+state 58
+
+    (24) comparison -> comparison LOG_OP . comparison
+    (23) comparison -> . expression REL_OP expression
+    (24) comparison -> . comparison LOG_OP comparison
+    (25) expression -> . IDENTIFIER
+    (26) expression -> . INT
+    (27) expression -> . STRING
+    (28) expression -> . LPAREN expression RPAREN
+    (29) expression -> . expression OPERATOR expression
+
+    IDENTIFIER      shift and go to state 44
+    INT             shift and go to state 46
+    STRING          shift and go to state 47
+    LPAREN          shift and go to state 48
+
+    comparison                     shift and go to state 65
+    expression                     shift and go to state 51
+
+state 59
+
+    (23) comparison -> expression REL_OP . expression
+    (25) expression -> . IDENTIFIER
+    (26) expression -> . INT
+    (27) expression -> . STRING
+    (28) expression -> . LPAREN expression RPAREN
+    (29) expression -> . expression OPERATOR expression
+
+    IDENTIFIER      shift and go to state 44
+    INT             shift and go to state 46
+    STRING          shift and go to state 47
+    LPAREN          shift and go to state 48
+
+    expression                     shift and go to state 66
+
+state 60
+
+    (20) repetition -> WHILE LPAREN condition RPAREN . DO action
+
+    DO              shift and go to state 67
+
+
+state 61
+
+    (21) repetition -> FROM IDENTIFIER EQUAL INT . TO INT DO action
+
+    TO              shift and go to state 68
+
+
+state 62
+
+    (29) expression -> expression OPERATOR expression .
+    (29) expression -> expression . OPERATOR expression
+
+  ! shift/reduce conflict for OPERATOR resolved as shift
+    SEMICOLON       reduce using rule 29 (expression -> expression OPERATOR expression .)
+    REL_OP          reduce using rule 29 (expression -> expression OPERATOR expression .)
+    RPAREN          reduce using rule 29 (expression -> expression OPERATOR expression .)
+    LOG_OP          reduce using rule 29 (expression -> expression OPERATOR expression .)
+    OPERATOR        shift and go to state 55
+
+  ! OPERATOR        [ reduce using rule 29 (expression -> expression OPERATOR expression .) ]
+
+
+state 63
+
+    (28) expression -> LPAREN expression RPAREN .
+
+    SEMICOLON       reduce using rule 28 (expression -> LPAREN expression RPAREN .)
+    OPERATOR        reduce using rule 28 (expression -> LPAREN expression RPAREN .)
+    REL_OP          reduce using rule 28 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 28 (expression -> LPAREN expression RPAREN .)
+    LOG_OP          reduce using rule 28 (expression -> LPAREN expression RPAREN .)
+
+
+state 64
+
+    (19) selection -> IF LPAREN condition RPAREN THEN . action
+    (30) action -> . assignment SEMICOLON
+    (31) action -> . LBRACE body RBRACE
+    (32) assignment -> . IDENTIFIER EQUAL expression SEMICOLON
+
+    LBRACE          shift and go to state 71
+    IDENTIFIER      shift and go to state 29
+
+    action                         shift and go to state 69
+    assignment                     shift and go to state 70
+
+state 65
+
+    (24) comparison -> comparison LOG_OP comparison .
+    (24) comparison -> comparison . LOG_OP comparison
+
+  ! shift/reduce conflict for LOG_OP resolved as shift
+    RPAREN          reduce using rule 24 (comparison -> comparison LOG_OP comparison .)
+    LOG_OP          shift and go to state 58
+
+  ! LOG_OP          [ reduce using rule 24 (comparison -> comparison LOG_OP comparison .) ]
+
+
+state 66
+
+    (23) comparison -> expression REL_OP expression .
+    (29) expression -> expression . OPERATOR expression
+
+    LOG_OP          reduce using rule 23 (comparison -> expression REL_OP expression .)
+    RPAREN          reduce using rule 23 (comparison -> expression REL_OP expression .)
+    OPERATOR        shift and go to state 55
+
+
+state 67
+
+    (20) repetition -> WHILE LPAREN condition RPAREN DO . action
+    (30) action -> . assignment SEMICOLON
+    (31) action -> . LBRACE body RBRACE
+    (32) assignment -> . IDENTIFIER EQUAL expression SEMICOLON
+
+    LBRACE          shift and go to state 71
+    IDENTIFIER      shift and go to state 29
+
+    action                         shift and go to state 72
+    assignment                     shift and go to state 70
+
+state 68
+
+    (21) repetition -> FROM IDENTIFIER EQUAL INT TO . INT DO action
+
+    INT             shift and go to state 73
+
+
+state 69
+
+    (19) selection -> IF LPAREN condition RPAREN THEN action .
+
+    IF              reduce using rule 19 (selection -> IF LPAREN condition RPAREN THEN action .)
+    WHILE           reduce using rule 19 (selection -> IF LPAREN condition RPAREN THEN action .)
+    FROM            reduce using rule 19 (selection -> IF LPAREN condition RPAREN THEN action .)
+    IDENTIFIER      reduce using rule 19 (selection -> IF LPAREN condition RPAREN THEN action .)
+    RBRACE          reduce using rule 19 (selection -> IF LPAREN condition RPAREN THEN action .)
+
+
+state 70
+
+    (30) action -> assignment . SEMICOLON
+
+    SEMICOLON       shift and go to state 74
+
+
+state 71
+
+    (31) action -> LBRACE . body RBRACE
+    (14) body -> . statement
+    (15) body -> . statement body
+    (16) statement -> . selection
+    (17) statement -> . repetition
+    (18) statement -> . assignment
+    (19) selection -> . IF LPAREN condition RPAREN THEN action
+    (20) repetition -> . WHILE LPAREN condition RPAREN DO action
+    (21) repetition -> . FROM IDENTIFIER EQUAL INT TO INT DO action
+    (32) assignment -> . IDENTIFIER EQUAL expression SEMICOLON
+
+    IF              shift and go to state 35
+    WHILE           shift and go to state 36
+    FROM            shift and go to state 37
+    IDENTIFIER      shift and go to state 29
+
+    body                           shift and go to state 75
+    statement                      shift and go to state 31
+    selection                      shift and go to state 32
+    repetition                     shift and go to state 33
+    assignment                     shift and go to state 34
+
+state 72
+
+    (20) repetition -> WHILE LPAREN condition RPAREN DO action .
+
+    IF              reduce using rule 20 (repetition -> WHILE LPAREN condition RPAREN DO action .)
+    WHILE           reduce using rule 20 (repetition -> WHILE LPAREN condition RPAREN DO action .)
+    FROM            reduce using rule 20 (repetition -> WHILE LPAREN condition RPAREN DO action .)
+    IDENTIFIER      reduce using rule 20 (repetition -> WHILE LPAREN condition RPAREN DO action .)
+    RBRACE          reduce using rule 20 (repetition -> WHILE LPAREN condition RPAREN DO action .)
+
+
+state 73
+
+    (21) repetition -> FROM IDENTIFIER EQUAL INT TO INT . DO action
+
+    DO              shift and go to state 76
+
+
+state 74
+
+    (30) action -> assignment SEMICOLON .
+
+    IF              reduce using rule 30 (action -> assignment SEMICOLON .)
+    WHILE           reduce using rule 30 (action -> assignment SEMICOLON .)
+    FROM            reduce using rule 30 (action -> assignment SEMICOLON .)
+    IDENTIFIER      reduce using rule 30 (action -> assignment SEMICOLON .)
+    RBRACE          reduce using rule 30 (action -> assignment SEMICOLON .)
+
+
+state 75
+
+    (31) action -> LBRACE body . RBRACE
+
+    RBRACE          shift and go to state 77
+
+
+state 76
+
+    (21) repetition -> FROM IDENTIFIER EQUAL INT TO INT DO . action
+    (30) action -> . assignment SEMICOLON
+    (31) action -> . LBRACE body RBRACE
+    (32) assignment -> . IDENTIFIER EQUAL expression SEMICOLON
+
+    LBRACE          shift and go to state 71
+    IDENTIFIER      shift and go to state 29
+
+    action                         shift and go to state 78
+    assignment                     shift and go to state 70
+
+state 77
+
+    (31) action -> LBRACE body RBRACE .
+
+    IF              reduce using rule 31 (action -> LBRACE body RBRACE .)
+    WHILE           reduce using rule 31 (action -> LBRACE body RBRACE .)
+    FROM            reduce using rule 31 (action -> LBRACE body RBRACE .)
+    IDENTIFIER      reduce using rule 31 (action -> LBRACE body RBRACE .)
+    RBRACE          reduce using rule 31 (action -> LBRACE body RBRACE .)
+
+
+state 78
+
+    (21) repetition -> FROM IDENTIFIER EQUAL INT TO INT DO action .
+
+    IF              reduce using rule 21 (repetition -> FROM IDENTIFIER EQUAL INT TO INT DO action .)
+    WHILE           reduce using rule 21 (repetition -> FROM IDENTIFIER EQUAL INT TO INT DO action .)
+    FROM            reduce using rule 21 (repetition -> FROM IDENTIFIER EQUAL INT TO INT DO action .)
+    IDENTIFIER      reduce using rule 21 (repetition -> FROM IDENTIFIER EQUAL INT TO INT DO action .)
+    RBRACE          reduce using rule 21 (repetition -> FROM IDENTIFIER EQUAL INT TO INT DO action .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for OPERATOR in state 62 resolved as shift
+WARNING: shift/reduce conflict for LOG_OP in state 65 resolved as shift

@@ -1,0 +1,179 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> Sentence
+Rule 1     Sentence -> MENOS Intervals POINT
+Rule 2     Sentence -> MAIS Intervals POINT
+Rule 3     Signal -> +
+Rule 4     Signal -> -
+Rule 5     Intervals -> Interval RemainingIntervals
+Rule 6     RemainingIntervals -> <empty>
+Rule 7     RemainingIntervals -> Interval RemainingIntervals
+Rule 8     Interval -> PA NUM COMMA NUM PF
+
+Terminals, with rules where they appear
+
++                    : 3
+-                    : 4
+COMMA                : 8
+MAIS                 : 2
+MENOS                : 1
+NUM                  : 8 8
+PA                   : 8
+PF                   : 8
+POINT                : 1 2
+error                : 
+
+Nonterminals, with rules where they appear
+
+Interval             : 5 7
+Intervals            : 1 2
+RemainingIntervals   : 5 7
+Sentence             : 0
+Signal               : 
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . Sentence
+    (1) Sentence -> . MENOS Intervals POINT
+    (2) Sentence -> . MAIS Intervals POINT
+
+    MENOS           shift and go to state 2
+    MAIS            shift and go to state 3
+
+    Sentence                       shift and go to state 1
+
+state 1
+
+    (0) S' -> Sentence .
+
+
+
+state 2
+
+    (1) Sentence -> MENOS . Intervals POINT
+    (5) Intervals -> . Interval RemainingIntervals
+    (8) Interval -> . PA NUM COMMA NUM PF
+
+    PA              shift and go to state 6
+
+    Intervals                      shift and go to state 4
+    Interval                       shift and go to state 5
+
+state 3
+
+    (2) Sentence -> MAIS . Intervals POINT
+    (5) Intervals -> . Interval RemainingIntervals
+    (8) Interval -> . PA NUM COMMA NUM PF
+
+    PA              shift and go to state 6
+
+    Intervals                      shift and go to state 7
+    Interval                       shift and go to state 5
+
+state 4
+
+    (1) Sentence -> MENOS Intervals . POINT
+
+    POINT           shift and go to state 8
+
+
+state 5
+
+    (5) Intervals -> Interval . RemainingIntervals
+    (6) RemainingIntervals -> .
+    (7) RemainingIntervals -> . Interval RemainingIntervals
+    (8) Interval -> . PA NUM COMMA NUM PF
+
+    POINT           reduce using rule 6 (RemainingIntervals -> .)
+    PA              shift and go to state 6
+
+    Interval                       shift and go to state 9
+    RemainingIntervals             shift and go to state 10
+
+state 6
+
+    (8) Interval -> PA . NUM COMMA NUM PF
+
+    NUM             shift and go to state 11
+
+
+state 7
+
+    (2) Sentence -> MAIS Intervals . POINT
+
+    POINT           shift and go to state 12
+
+
+state 8
+
+    (1) Sentence -> MENOS Intervals POINT .
+
+    $end            reduce using rule 1 (Sentence -> MENOS Intervals POINT .)
+
+
+state 9
+
+    (7) RemainingIntervals -> Interval . RemainingIntervals
+    (6) RemainingIntervals -> .
+    (7) RemainingIntervals -> . Interval RemainingIntervals
+    (8) Interval -> . PA NUM COMMA NUM PF
+
+    POINT           reduce using rule 6 (RemainingIntervals -> .)
+    PA              shift and go to state 6
+
+    Interval                       shift and go to state 9
+    RemainingIntervals             shift and go to state 13
+
+state 10
+
+    (5) Intervals -> Interval RemainingIntervals .
+
+    POINT           reduce using rule 5 (Intervals -> Interval RemainingIntervals .)
+
+
+state 11
+
+    (8) Interval -> PA NUM . COMMA NUM PF
+
+    COMMA           shift and go to state 14
+
+
+state 12
+
+    (2) Sentence -> MAIS Intervals POINT .
+
+    $end            reduce using rule 2 (Sentence -> MAIS Intervals POINT .)
+
+
+state 13
+
+    (7) RemainingIntervals -> Interval RemainingIntervals .
+
+    POINT           reduce using rule 7 (RemainingIntervals -> Interval RemainingIntervals .)
+
+
+state 14
+
+    (8) Interval -> PA NUM COMMA . NUM PF
+
+    NUM             shift and go to state 15
+
+
+state 15
+
+    (8) Interval -> PA NUM COMMA NUM . PF
+
+    PF              shift and go to state 16
+
+
+state 16
+
+    (8) Interval -> PA NUM COMMA NUM PF .
+
+    PA              reduce using rule 8 (Interval -> PA NUM COMMA NUM PF .)
+    POINT           reduce using rule 8 (Interval -> PA NUM COMMA NUM PF .)
+
